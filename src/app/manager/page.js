@@ -38,10 +38,10 @@ const page = () => {
             <Link href="/manager/postjobs" className="hover:text-orange-400 transition-colors">Post Jobs</Link>
           </li>
           <li>
-            <Link href="/fetch-candidates" className="hover:text-red-400 transition-colors">Fetch Candidates</Link>
+            <Link href="/manager/fetch_candidates" className="hover:text-red-400 transition-colors">Fetch Candidates</Link>
           </li>
           <li>
-            <Link href="/update-interview-status" className="hover:text-indigo-400 transition-colors">Update Application Status</Link>
+            <Link href="/manager/update_interview_status" className="hover:text-indigo-400 transition-colors">Update Application Status</Link>
           </li>
           <li>
             <Link href="/assign-date" className="hover:text-teal-400 transition-colors">Assign Interview Dates</Link>
@@ -69,8 +69,8 @@ const page = () => {
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6 items-center">
           {[
             { icon: <FaClipboardList className="text-3xl mb-4 text-orange-600" />, label: 'Post Jobs', path: '/manager/postjobs' },
-            { icon: <FaUsers className="text-3xl mb-4 text-red-600" />, label: 'Fetch Candidates', path: '/fetch-candidates' },
-            { icon: <FaEdit className="text-3xl mb-4 text-indigo-600" />, label: 'Update Applicant Status', path: '/update-interview-status' },
+            { icon: <FaUsers className="text-3xl mb-4 text-red-600" />, label: 'Fetch Candidates', path: '/manager/fetch_candidates' },
+            { icon: <FaEdit className="text-3xl mb-4 text-indigo-600" />, label: 'Update Applicant Status', path: '/manager/update_interview_status' },
             { icon: <FaCalendarCheck className="text-3xl mb-4 text-teal-600" />, label: 'Assign Interview Dates', path: '/assign-date' },
             { icon: <FaCheckCircle className="text-3xl mb-4 text-yellow-600" />, label: 'Selected Candidates', path: '/selected-candidates' },
             { icon: <FaCheckCircle className="text-3xl mb-4 text-yellow-600" />, label: 'Update Final Result', path: '/update-final-result' },

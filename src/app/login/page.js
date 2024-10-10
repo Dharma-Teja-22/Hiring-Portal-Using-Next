@@ -18,24 +18,25 @@ import Link from "next/link";
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-    role: "",
+    email: "dt@ms.com",
+    password: "Dharma@22",
+    role: "Manager",
     first_name:"",
     last_name:"",
   });
 
   const router = useRouter();
 
-  const handleSubmit = async () => {
-    event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Correctly capturing the event
+  
     console.log("Button clicked! Form data:", loginData);
-
+  
     if (!loginData.email || !loginData.password || !loginData.role) {
       toast.error("Please fill in all fields", { autoClose: 3000 });
       return;
     }
-
+  
     const response = await fetch("/auth", {
       method: "PUT",
       headers: {
@@ -43,28 +44,34 @@ export default function Login() {
       },
       body: JSON.stringify(loginData),
     });
-
+  
     if (response.ok) {
-      const  {msg}  = await response.json();
-      toast.success(msg, { autoClose: 1000 });
-      // Store email in localStorage
+      const { msg } = await response.json();
+    //   console.log(msg, "Msg from Login")
+      toast.success(msg, { autoClose: 1000 }); 
       localStorage.setItem("userEmail", loginData.email);
       localStorage.setItem("firstName", msg.firstName);
       localStorage.setItem("lastName", msg.lastName);
-      localStorage.setItem("managerId",msg.id)
-
+  
       setTimeout(() => {
         if (loginData.role === "Manager") {
+      localStorage.setItem("managerId", msg.id);
+          toast.success("Login Successful", { autoClose: 2500 });
           router.push("/manager");
-        } else {
+        } 
+        else {
+      localStorage.setItem("candidateId", msg.id);
+
+          toast.success("Login Successful", { autoClose: 2500 });
           router.push("/candidate");
         }
-      }, 1000);
-    } else {
+      }, 100);
+    } 
+    else {
       const errorMessage = await response.json();
       toast.error(errorMessage.message || "Invalid credentials", { autoClose: 3000 });
     }
-
+  
     setLoginData({
       email: "",
       password: "",

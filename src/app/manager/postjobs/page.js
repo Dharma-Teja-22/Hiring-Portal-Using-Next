@@ -44,7 +44,6 @@ const page = () => {
         body: JSON.stringify(combinedData),
       });
 
-      console.log(response, "from forma vklklk-----------------");
       if (response === "Date is in the past!") {
         const toastId = toast.warning(
           "Date is in the Past! Cannot post the job application!",
