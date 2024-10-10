@@ -32,8 +32,9 @@ const page = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <div className="w-64 bg-slate-900 text-white h-full p-6 flex flex-col pt-10 gap-4">
-        <h2 className="text-xl font-bold mb-4">Manager Menu</h2>
+        <h2 className="text-xl font-bold  text-center">Manager Menu</h2>
         <ul className="flex flex-col gap-6 flex-grow">
+        <hr></hr>
           <li>
             <Link href="/manager/postjobs" className="hover:text-orange-400 transition-colors">Post Jobs</Link>
           </li>
@@ -44,10 +45,13 @@ const page = () => {
             <Link href="/manager/update_interview_status" className="hover:text-indigo-400 transition-colors">Update Application Status</Link>
           </li>
           <li>
-            <Link href="/assign-date" className="hover:text-teal-400 transition-colors">Assign Interview Dates</Link>
+            <Link href="/manager/assign_interview_date" className="hover:text-teal-400 transition-colors">Assign Interview Dates</Link>
           </li>
           <li>
-            <Link href="/update-final-result" className="hover:text-yellow-400 transition-colors">End Result</Link>
+            <Link href="/manager/selected_candidates" className="hover:text-indigo-500 transition-colors">Selected Candidates</Link>
+          </li>
+          <li>
+            <Link href="/manager/end_result" className="hover:text-yellow-400 transition-colors">End Result</Link>
           </li>
         </ul>
       </div>
@@ -71,9 +75,9 @@ const page = () => {
             { icon: <FaClipboardList className="text-3xl mb-4 text-orange-600" />, label: 'Post Jobs', path: '/manager/postjobs' },
             { icon: <FaUsers className="text-3xl mb-4 text-red-600" />, label: 'Fetch Candidates', path: '/manager/fetch_candidates' },
             { icon: <FaEdit className="text-3xl mb-4 text-indigo-600" />, label: 'Update Applicant Status', path: '/manager/update_interview_status' },
-            { icon: <FaCalendarCheck className="text-3xl mb-4 text-teal-600" />, label: 'Assign Interview Dates', path: '/assign-date' },
-            { icon: <FaCheckCircle className="text-3xl mb-4 text-yellow-600" />, label: 'Selected Candidates', path: '/selected-candidates' },
-            { icon: <FaCheckCircle className="text-3xl mb-4 text-yellow-600" />, label: 'Update Final Result', path: '/update-final-result' },
+            { icon: <FaCalendarCheck className="text-3xl mb-4 text-teal-600" />, label: 'Assign Interview Dates', path: '/manager/assign_interview_date' },
+            { icon: <FaCheckCircle className="text-3xl mb-4 text-yellow-600" />, label: 'Selected Candidates', path: '/manager/selected_candidates' },
+            { icon: <FaCheckCircle className="text-3xl mb-4 text-yellow-600" />, label: 'Update Final Result', path: '/manager/end_result' },
           ].map(({ icon, label, path }, index) => (
             <Card 
               key={index}

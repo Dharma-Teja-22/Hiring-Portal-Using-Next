@@ -9,12 +9,13 @@ const Page = () => {
   const [jobs, setJobs] = useState([]);
   const [statusMessages, setStatusMessages] = useState({});
   const [loadingJobId, setLoadingJobId] = useState(null);
+  const [interviewDetails, setInterviewDetails] = useState({ date: '', duration: '' });
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const candidate_id = localStorage.getItem("candidateId");
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const candidate_id = localStorage.getItem("candidateId");
-
       if (candidate_id) {
         try {
           const response = await fetch("/candidate/api", {
@@ -39,10 +40,9 @@ const Page = () => {
     };
 
     fetchJobs();
-  }, []);
+  }, [candidate_id]);
 
   const fetchJobStatus = async (job_id) => {
-    const candidate_id = typeof window !== 'undefined' ? Number(localStorage.getItem("candidateId")) : null;
     if (candidate_id) {
       try {
         setLoadingJobId(job_id);
@@ -53,7 +53,7 @@ const Page = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ candidate_id, job_id }), // Send jobId along with candidateId
+          body: JSON.stringify({ candidate_id, job_id }),
         });
 
         if (!response.ok) {
@@ -77,9 +77,40 @@ const Page = () => {
     }
   };
 
-  const handleInterviewDetails = (jobId) => {
-    router.push('/candidate/interview-details'); // Ensure this route exists
-    toast.info(`Fetching interview details for job ID: ${jobId}`);
+  const handleInterviewDetails = async (jobId) => {
+    const candidateId = localStorage.getItem("candidateId");
+    const data = { candidate_id: candidateId, job_id: jobId };
+      try {
+      const response = await fetch("/candidate/api", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+  
+      const responseData = await response.json();
+      const { msg } = responseData;
+  
+      if (msg) {
+        setInterviewDetails({
+          date: msg.interview_date,
+          duration: msg.Duration,
+        });
+        setShowModal(true); // Show the modal with interview details
+      }
+    } catch (error) {
+      console.error("Error fetching interview details:", error);
+    }
+  };
+  
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -93,7 +124,7 @@ const Page = () => {
         <ToastContainer />
         <h1 className="text-2xl font-bold mb-6 text-center">Applied Jobs</h1>
         {jobs.length > 0 ? (
-          <div className="overflow-x-auto"> {/* Added this div for horizontal scrolling */}
+          <div className="overflow-x-auto">
             <table className="min-w-full bg-white shadow-lg rounded-lg">
               <thead>
                 <tr>
@@ -109,7 +140,7 @@ const Page = () => {
                 {jobs.map((job) => (
                   <tr key={job.job_id} className="hover:bg-gray-100">
                     <td className="px-4 py-4 whitespace-nowrap text-sm text-center font-medium text-gray-900">{job.title}</td>
-                    <td className="w-3/4 px-4 py-4 whitespace-wrap text-sm text-gray-500  ">{job.description}</td>
+                    <td className="w-3/4 px-4 py-4 whitespace-wrap text-sm text-gray-500">{job.description}</td>
                     <td className="px-4 py-4 whitespace-nowrap text-sm text-center text-gray-500">₹ {job.salary}</td>
                     <td className="px-4 py-4 whitespace-nowrap text-sm text-center text-gray-500">{job.location}</td>
                     <td className="px-4 py-4 whitespace-nowrap text-sm text-center text-gray-500">
@@ -148,19 +179,8 @@ const Page = () => {
                               fill="none"
                               viewBox="0 0 24 24"
                             >
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                              ></circle>
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zM2 12a10 10 0 0010 10v-4a6 6 0 01-6-6H2z"
-                              ></path>
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zM2 12a10 10 0 0010 10v-4a6 6 0 01-6-6H2z"></path>
                             </svg>
                           ) : statusMessages[job.job_id] ? (
                             statusMessages[job.job_id] === "Error fetching job status."
@@ -186,6 +206,26 @@ const Page = () => {
           </div>
         )}
       </div>
+
+      {/* Modal for Interview Details */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h3 className="text-xl font-bold mb-4">Interview Details</h3>
+            <div className="mb-4">
+              <strong>Date:</strong> {interviewDetails.date}
+            </div>
+            <div className="mb-4">
+              <strong>Duration:</strong> {interviewDetails.duration}
+            </div>
+            <div className="flex justify-center mt-6">
+              <button onClick={closeModal} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

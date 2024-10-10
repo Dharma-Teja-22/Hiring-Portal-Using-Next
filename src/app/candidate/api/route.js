@@ -118,9 +118,18 @@ export async function PUT(request) {
 
 //Interview Status Check
 export async function PATCH(request) {
-  const data = request.json();
-  console.log(data);
   try {
+    const data = await request.json(); // Ensure to await the promise to get JSON
+    console.log(data, "From the frontend");
+
+    // Check for required fields
+    if (!data.candidate_id || !data.job_id) {
+      return NextResponse.json(
+        { message: "Candidate ID and Job ID are required" },
+        { status: StatusCodes.BAD_REQUEST }
+      );
+    }
+
     const sql = `SELECT interview_date, Duration, interview_result FROM interviews WHERE candidate_id = ? AND job_id = ?`;
     const result = await new Promise((resolve, reject) => {
       db.query(sql, [data.candidate_id, data.job_id], (err, res) => {
@@ -136,7 +145,7 @@ export async function PATCH(request) {
     if (result.length === 0) {
       return NextResponse.json(
         { message: "Not Assigned with Interview Date" },
-        { status: StatusCodes.OK }
+        { status: StatusCodes.NOT_FOUND } // Use NOT_FOUND for clarity
       );
     }
 

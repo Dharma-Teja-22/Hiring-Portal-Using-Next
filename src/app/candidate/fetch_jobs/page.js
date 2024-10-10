@@ -45,7 +45,8 @@ const Page = () => {
           ← 
         </button>
       </div>
-      <div className="container grid shadow-2xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-4 pt-2 pb-2">
+      {/* shadow-2xl  */}
+      <div className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-4 pt-2 pb-2">
         {jobs.length === 0 ? (
           <p>Loading jobs...</p>
         ) : (
