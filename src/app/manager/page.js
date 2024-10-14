@@ -20,12 +20,16 @@ const page = () => {
     // const firstName = localStorage.getItem("firstName");
     // const lastName = localStorage.getItem("lastName");
     
-    if (firstName) setStoredFirstName(firstName);
-    if (lastName) setStoredLastName(lastName);
+    setStoredFirstName(firstName);
+    setStoredLastName(lastName);
   }, []);
 
   const logout = () => {
-    localStorage.clear();
+    const loginCookies = document.cookie.split('; ');
+    loginCookies.map(loginCookie=>{
+      const cookieName = loginCookie.split('=')[0];
+      cookies.remove(cookieName)
+    });
     router.push('/'); 
   };
 

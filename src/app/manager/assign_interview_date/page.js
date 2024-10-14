@@ -57,7 +57,7 @@ const Page = () => {
         await fetch("/manager/api/interview_status_update", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json", 
           },
           body: JSON.stringify(data),
         });

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
 import {
   Card,
   CardContent,
@@ -18,6 +19,7 @@ import Link from "next/link";
 import { useCookies } from 'next-client-cookies';
 
 export default function Login() {
+
 //   const [loginData, setLoginData] = useState({
 //     email: "dt@ms.com",
 //     password: "Dharma@22",
@@ -36,13 +38,10 @@ export default function Login() {
   const router = useRouter();
   const cookies = useCookies();
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Correctly capturing the event
-  
-    console.log("Button clicked! Form data:", loginData);
-  
+    event.preventDefault(); 
     if (!loginData.email || !loginData.password || !loginData.role) {
       toast.error("Please fill in all fields", { autoClose: 3000 });
-      return;
+      return "Error- Fill the Fields";
     }
   
     const response = await fetch("/auth", {
@@ -60,6 +59,7 @@ export default function Login() {
       cookies.set("userEmail", loginData.email);
       cookies.set("firstName", msg.firstName);
       cookies.set("lastName", msg.lastName);
+      cookies.set("token",msg.token)
 
     //   localStorage.setItem("userEmail", loginData.email);
     //   localStorage.setItem("firstName", msg.firstName);
@@ -81,7 +81,8 @@ export default function Login() {
         }
       }, 100);
     } 
-    else {
+    else 
+    {
       const errorMessage = await response.json();
       toast.error(errorMessage.message || "Invalid credentials", { autoClose: 3000 });
     }
@@ -94,6 +95,7 @@ export default function Login() {
   };
 
   return (
+    
     <div className="flex h-screen w-screen place-items-center justify-center bg-gray-900">
       <ToastContainer />
       <div>

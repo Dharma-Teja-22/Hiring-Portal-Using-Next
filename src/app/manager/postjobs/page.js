@@ -14,6 +14,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useCookies } from 'next-client-cookies';
+import "react-toastify/dist/ReactToastify.css";
 
 const page = () => {
   const cookies = useCookies();
@@ -38,14 +39,20 @@ const page = () => {
         manager_id,
       };
 
-      const response = await fetch("/manager/api", {
+      const res = await fetch("/manager/api", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+        //   "Content-Type": "application/json", 
+          Authorization: `Bearer ${cookies.get('token')}`
         },
         body: JSON.stringify(combinedData),
       });
 
+      const responseData = await res.json();
+      const response = responseData.message;
+
+      console.log(response);
+      
       if (response === "Date is in the past!") {
         const toastId = toast.warning(
           "Date is in the Past! Cannot post the job application!",

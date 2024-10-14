@@ -1,12 +1,26 @@
 import { NextResponse } from "next/server";
 import { StatusCodes } from "http-status-codes";
 import db from "../../../config/db";
+import jwt from 'jsonwebtoken'; 
 
 //Manager Post Jobs
 export async function POST(request) {
   try {
+    
+    const authHeader = request.headers.get('Authorization');
+    const token = authHeader && authHeader.split(' ')[1]; 
+    if (!token) {
+      return NextResponse.json(
+        { message: "No token provided." },
+        { status: StatusCodes.UNAUTHORIZED }
+      );
+    }
+
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const manager_id = decoded.id;
+
     const data = await request.json();
-    const manager_id = data.manager_id;
     if (new Date(data.application_deadline) > new Date()) {
       const sql = `INSERT INTO jobs (title, description, salary, location, job_type, experience_level, skills, application_deadline, manager_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
       await new Promise((resolve, reject) => {
@@ -25,10 +39,8 @@ export async function POST(request) {
           ],
           (err, res) => {
             if (err) {
-              console.log(err, "from Routes");
               reject(err);
             } else {
-              console.log(res, "from Routes");
               resolve(res);
             }
           }
@@ -55,10 +67,22 @@ export async function POST(request) {
 }
 
 //Get Candidates under Specific Manager
-export async function PUT(request) {
+export async function GET(request) {
   try {
-    const data = await request.json();
-    const manager_id = data.manager_id;
+    
+    const authHeader = request.headers.get('Authorization');
+    const token = authHeader && authHeader.split(' ')[1]; 
+    if (!token) {
+      return NextResponse.json(
+        { message: "No token provided." },
+        { status: StatusCodes.UNAUTHORIZED }
+      );
+    }
+
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const manager_id = decoded.id;
+
     const sql = `
         SELECT c.*, a.job_id, j.title, a.status, a.resume_url
         FROM candidates c 
@@ -69,10 +93,10 @@ export async function PUT(request) {
     const candidates = await new Promise((resolve, reject) => {
       db.query(sql, [manager_id], (err, result) => {
         if (err) {
-          console.log(err, "from Routes");
+        //   console.log(err, "from Routes");
           reject(err);
         } else {
-          console.log(result, "from Routes");
+        //   console.log(result, "from Routes");
           resolve(result);
         }
       });
@@ -92,7 +116,8 @@ export async function PUT(request) {
         { status: StatusCodes.NOT_FOUND }
       );
     }
-  } catch (err) {
+  } 
+  catch (err) {
     console.error(err);
     return NextResponse.json(
       { message: "An error occurred while fetching candidate info." },

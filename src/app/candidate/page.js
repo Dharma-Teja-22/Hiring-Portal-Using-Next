@@ -25,7 +25,11 @@ const Page = () => {
   }, []);
 
   const logout = () => {
-    localStorage.clear();
+    const loginCookies = document.cookie.split('; ');
+    loginCookies.map(loginCookie=>{
+      const cookieName = loginCookie.split('=')[0];
+      cookies.remove(cookieName)
+    });
     router.push('/'); 
   };
 
