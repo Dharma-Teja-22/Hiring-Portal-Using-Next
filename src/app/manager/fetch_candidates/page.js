@@ -3,14 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card } from "../../../components/ui/card";
+import { useCookies } from 'next-client-cookies';
 
 const CandidatesPage = () => {
+  const cookies = useCookies();
   const [candidates, setCandidates] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     const fetchCandidates = async () => {
-      const manager_id = Number(localStorage.getItem("managerId"));
+      const manager_id = Number(cookies.get("managerId"));
       if (manager_id) {
         try {
           const response = await fetch("/manager/api", {
@@ -36,7 +38,7 @@ const CandidatesPage = () => {
 
   const handleCardClick = (candidateId, jobId) => {
     const dataToStore = { candidate_id: candidateId, job_id: jobId };
-  localStorage.setItem("candidateData", JSON.stringify(dataToStore));
+    cookies.set("candidateData", JSON.stringify(dataToStore));
     
     router.push(`/manager/candidate_profile`);
   };

@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useCookies } from 'next-client-cookies';
 
 const Page = () => {
   const [jobs, setJobs] = useState([]);
   const router = useRouter();
+  const cookies = useCookies();
 
-  const candidate_id = typeof window !== 'undefined' ? localStorage.getItem("candidateId") : null;
+  const candidate_id = typeof window !== 'undefined' ? cookies.get("candidateId") : null;
 
   useEffect(() => {
     const fetchJobs = async () => {

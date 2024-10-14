@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCookies } from 'next-client-cookies';
 
 const Page = () => {
   const [jobs, setJobs] = useState([]);
   const router = useRouter();
+  const cookies = useCookies();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -31,8 +33,8 @@ const Page = () => {
 
   const handleOpenApplicationForm = (job) => {
     if (job.status !== "Closed") {
-      localStorage.setItem("selectedJobTitle", job.title);
-      localStorage.setItem("selectedJobId", job.job_id.toString());
+      cookies.set("selectedJobTitle", job.title);
+      cookies.set("selectedJobId", job.job_id.toString());
       router.push(`/candidate/applyjobs`);
     }
   };

@@ -13,10 +13,12 @@ import { Button } from "../../../components/ui/button";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useCookies } from 'next-client-cookies';
 
 const page = () => {
+  const cookies = useCookies();
   const router = useRouter();
-  const manager_id = Number(localStorage.getItem("managerId"));
+  const manager_id = Number(cookies.get("managerId"));
   const [data, setData] = useState({
     title: "",
     description: "",

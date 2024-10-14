@@ -4,10 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from 'next-client-cookies';
+
 
 const Page = () => {
+  const cookies = useCookies();
   const router = useRouter();
-  const candidateData = localStorage.getItem("candidateData");
+  const candidateData = cookies.get("candidateData");
   const { candidate_id, job_id } = JSON.parse(candidateData); // Destructure values
   const [candidate, setCandidate] = useState(null);
 

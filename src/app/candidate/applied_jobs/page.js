@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useCookies } from 'next-client-cookies';
 
 const Page = () => {
   const [jobs, setJobs] = useState([]);
@@ -12,7 +13,9 @@ const Page = () => {
   const [interviewDetails, setInterviewDetails] = useState({ date: '', duration: '' });
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const candidate_id = localStorage.getItem("candidateId");
+  const cookies = useCookies();
+
+  const candidate_id = cookies.get("candidateId");
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -46,8 +49,7 @@ const Page = () => {
     if (candidate_id) {
       try {
         setLoadingJobId(job_id);
-        localStorage.setItem("jobId", String(job_id));
-
+        // localStorage.setItem("jobId", String(job_id));
         const response = await fetch("/candidate/api/job_status", {
           method: "POST",
           headers: {
@@ -78,7 +80,7 @@ const Page = () => {
   };
 
   const handleInterviewDetails = async (jobId) => {
-    const candidateId = localStorage.getItem("candidateId");
+    const candidateId = cookies.get("candidateId");
     const data = { candidate_id: candidateId, job_id: jobId };
       try {
       const response = await fetch("/candidate/api", {

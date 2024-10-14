@@ -4,10 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import { useCookies } from 'next-client-cookies';
 
 const Page = () => {
+  const cookies = useCookies();
   const [candidates, setCandidates] = useState([]);
-  const manager_id = Number(typeof window !== 'undefined' ? localStorage.getItem('managerId') : null);
+  const manager_id = Number(typeof window !== 'undefined' ? cookies.get('managerId') : null);
   const router = useRouter();
 
   useEffect(() => {

@@ -8,9 +8,12 @@ import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'next-client-cookies';
 
 const ApplyJobPage = () => {
   const router = useRouter();
+  const cookies = useCookies();
+
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -22,11 +25,11 @@ const ApplyJobPage = () => {
 
   useEffect(() => {
     setData({
-      firstName: localStorage.getItem("firstName") || '',
-      lastName: localStorage.getItem("lastName") || '',
-      candidate_id: Number(localStorage.getItem("candidateId")) || null,
-      job_title: localStorage.getItem("selectedJobTitle") || '',
-      job_id: Number(localStorage.getItem("selectedJobId")) || null,
+      firstName: cookies.get("firstName") || '',
+      lastName: cookies.get("lastName") || '',
+      candidate_id: Number(cookies.get("candidateId")) || null,
+      job_title: cookies.get("selectedJobTitle") || '',
+      job_id: Number(cookies.get("selectedJobId")) || null,
       resume_url: '',
     });
   }, []);

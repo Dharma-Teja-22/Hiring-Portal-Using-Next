@@ -4,14 +4,16 @@ import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { useCookies } from 'next-client-cookies';
 
 const Page = () => {
+  const cookies = useCookies();
   const [candidates, setCandidates] = useState([]);
   const managerId = Number(
-    typeof window !== "undefined" ? localStorage.getItem("managerId") : null
+    typeof window !== "undefined" ? cookies.get("managerId") : null
   );
   const router = useRouter();
-  const manager_id = Number(localStorage.getItem("managerId"));
+  const manager_id = Number(cookies.get("managerId"));
 
   useEffect(() => {
     const fetchCandidates = async () => {

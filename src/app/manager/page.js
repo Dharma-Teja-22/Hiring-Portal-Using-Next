@@ -5,15 +5,20 @@ import { useRouter } from 'next/navigation';
 import { Card } from '../../components/ui/card'; // Ensure this component exists
 import { FaClipboardList, FaUsers, FaEdit, FaCalendarCheck, FaCheckCircle } from 'react-icons/fa';
 import Link from 'next/link';
+import { useCookies } from 'next-client-cookies';
 
 const page = () => {
   const router = useRouter();
+  const cookies = useCookies();
   const [storedFirstName, setStoredFirstName] = useState('');
   const [storedLastName, setStoredLastName] = useState('');
 
   useEffect(() => {
-    const firstName = localStorage.getItem("firstName");
-    const lastName = localStorage.getItem("lastName");
+    const firstName = cookies.get("firstName");
+    const lastName  = cookies.get("lastName");
+    
+    // const firstName = localStorage.getItem("firstName");
+    // const lastName = localStorage.getItem("lastName");
     
     if (firstName) setStoredFirstName(firstName);
     if (lastName) setStoredLastName(lastName);
@@ -52,7 +57,7 @@ const page = () => {
           </li>
           <li>
             <Link href="/manager/end_result" className="hover:text-yellow-400 transition-colors">End Result</Link>
-          </li>
+          {/* </li><hr></hr> */}</li>
         </ul>
       </div>
 

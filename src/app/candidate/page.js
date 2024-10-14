@@ -5,15 +5,21 @@ import { useRouter } from 'next/navigation';
 import { Card } from '../../components/ui/card'; 
 import { FaBriefcase, FaFileUpload, FaTrophy } from 'react-icons/fa';
 import Link from 'next/link';
+import { useCookies } from 'next-client-cookies';
+
 
 const Page = () => {
   const router = useRouter();
+  const cookies = useCookies();
   const [storedFirstName, setStoredFirstName] = useState('');
   const [storedLastName, setStoredLastName] = useState('');
 
   useEffect(() => {
-    const firstName = localStorage.getItem("firstName") || '';
-    const lastName = localStorage.getItem("lastName") || '';
+    const firstName = cookies.get("firstName") || '';
+
+    console.log(firstName,"form The cookies in Candidate")
+
+    const lastName = cookies.get("lastName") || '';
     setStoredFirstName(firstName);
     setStoredLastName(lastName);
   }, []);

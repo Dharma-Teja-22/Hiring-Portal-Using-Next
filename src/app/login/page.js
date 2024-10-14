@@ -15,8 +15,17 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useCookies } from 'next-client-cookies';
 
 export default function Login() {
+//   const [loginData, setLoginData] = useState({
+//     email: "dt@ms.com",
+//     password: "Dharma@22",
+//     role: "Manager",
+//     first_name:"",
+//     last_name:"",
+//   });
+
   const [loginData, setLoginData] = useState({
     email: "dt@ms.com",
     password: "Dharma@22",
@@ -24,9 +33,8 @@ export default function Login() {
     first_name:"",
     last_name:"",
   });
-
   const router = useRouter();
-
+  const cookies = useCookies();
   const handleSubmit = async (event) => {
     event.preventDefault(); // Correctly capturing the event
   
@@ -49,21 +57,27 @@ export default function Login() {
       const { msg } = await response.json();
     //   console.log(msg, "Msg from Login")
       toast.success(msg, { autoClose: 1000 }); 
-      localStorage.setItem("userEmail", loginData.email);
-      localStorage.setItem("firstName", msg.firstName);
-      localStorage.setItem("lastName", msg.lastName);
+      cookies.set("userEmail", loginData.email);
+      cookies.set("firstName", msg.firstName);
+      cookies.set("lastName", msg.lastName);
+
+    //   localStorage.setItem("userEmail", loginData.email);
+    //   localStorage.setItem("firstName", msg.firstName);
+    //   localStorage.setItem("lastName", msg.lastName);
   
       setTimeout(() => {
-        if (loginData.role === "Manager") {
-      localStorage.setItem("managerId", msg.id);
-          toast.success("Login Successful", { autoClose: 2500 });
-          router.push("/manager");
+        if (loginData.role === "Manager")
+        {
+            cookies.set("managerId", msg.id);
+            // localStorage.setItem("managerId", msg.id);
+            toast.success("Login Successful", { autoClose: 2500 });
+            router.push("/manager");
         } 
         else {
-      localStorage.setItem("candidateId", msg.id);
-
-          toast.success("Login Successful", { autoClose: 2500 });
-          router.push("/candidate");
+            cookies.set("candidateId", msg.id);
+            // localStorage.setItem("candidateId", msg.id);
+            toast.success("Login Successful", { autoClose: 2500 });
+            router.push("/candidate");
         }
       }, 100);
     } 
