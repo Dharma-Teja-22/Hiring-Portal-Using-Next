@@ -2,11 +2,12 @@ import { NextResponse } from "next/server";
 import { StatusCodes } from "http-status-codes";
 import db from "../../../../config/db";
 import nodemailer from "nodemailer";
+import verify from "../route"
 
 //Candidate Info for Updating Final Result
-export async function POST(request) {
+export async function GET(request) {
   try {
-    const data = await request.json();
+    const manager_id = verify(request);
     // Fetch candidate information for interview
     const sql = `
           SELECT c.*, a.job_id, j.title, a.status, i.interview_date, i.interview_result
@@ -17,7 +18,7 @@ export async function POST(request) {
           WHERE j.manager_id = ?`;
 
     const candidates = await new Promise((resolve, reject) => {
-      db.query(sql, [data.manager_id], (err, results) => {
+      db.query(sql, manager_id, (err, results) => {
         if (err) {
           console.error(err);
           reject(err);

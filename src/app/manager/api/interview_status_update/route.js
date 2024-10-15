@@ -73,6 +73,7 @@ export async function PATCH(request) {
           }
         );
       });
+
       if (status === null) {
         return NextResponse.json(
           {

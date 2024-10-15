@@ -20,11 +20,11 @@ const Page = () => {
       if (manager_id) {
         try {
           const response = await fetch("/manager/api", {
-            method: "PUT",
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${cookies.get('token')}`
             },
-            body: JSON.stringify({ manager_id }),
           });
           if (!response.ok) {
             throw new Error("Network response was not ok");

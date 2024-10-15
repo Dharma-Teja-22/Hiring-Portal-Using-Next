@@ -3,22 +3,29 @@ import { StatusCodes } from "http-status-codes";
 import db from "../../../config/db";
 import jwt from 'jsonwebtoken'; 
 
-//Manager Post Jobs
-export async function POST(request) {
-  try {
-    
+
+// Function for JWT Verification
+export default function verify(request)
+{
     const authHeader = request.headers.get('Authorization');
     const token = authHeader && authHeader.split(' ')[1]; 
-    if (!token) {
+    if (!token) 
+    {
       return NextResponse.json(
         { message: "No token provided." },
         { status: StatusCodes.UNAUTHORIZED }
       );
     }
-
     // Verify the token
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const manager_id = decoded.id;
+    return manager_id;
+}
+
+//Manager Post Jobs
+export async function POST(request) {
+  try {
+    const manager_id = verify(request);
 
     const data = await request.json();
     if (new Date(data.application_deadline) > new Date()) {
@@ -69,20 +76,7 @@ export async function POST(request) {
 //Get Candidates under Specific Manager
 export async function GET(request) {
   try {
-    
-    const authHeader = request.headers.get('Authorization');
-    const token = authHeader && authHeader.split(' ')[1]; 
-    if (!token) {
-      return NextResponse.json(
-        { message: "No token provided." },
-        { status: StatusCodes.UNAUTHORIZED }
-      );
-    }
-
-    // Verify the token
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    const manager_id = decoded.id;
-
+    const manager_id = verify(request);
     const sql = `
         SELECT c.*, a.job_id, j.title, a.status, a.resume_url
         FROM candidates c 

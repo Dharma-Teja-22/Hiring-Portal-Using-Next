@@ -20,6 +20,14 @@ import { useCookies } from 'next-client-cookies';
 
 export default function Login() {
 
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+    role: "",
+    first_name:"",
+    last_name:"",
+  });
+
 //   const [loginData, setLoginData] = useState({
 //     email: "dt@ms.com",
 //     password: "Dharma@22",
@@ -28,13 +36,6 @@ export default function Login() {
 //     last_name:"",
 //   });
 
-  const [loginData, setLoginData] = useState({
-    email: "dt@ms.com",
-    password: "Dharma@22",
-    role: "Manager",
-    first_name:"",
-    last_name:"",
-  });
   const router = useRouter();
   const cookies = useCookies();
   const handleSubmit = async (event) => {
@@ -124,6 +125,7 @@ export default function Login() {
                 <Input
                   id="password"
                   type="password"
+                  placeholder="enter password"
                   required
                   value={loginData.password}
                   onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}

@@ -18,11 +18,11 @@ const page = () => {
       if (manager_id) {
         try {
           const response = await fetch("/manager/api/final_result_update", {
-            method: "POST",
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${cookies.get('token')}`
             },
-            body: JSON.stringify({ manager_id }),
           });
           if (!response.ok) {
             throw new Error("Network response was not ok");
