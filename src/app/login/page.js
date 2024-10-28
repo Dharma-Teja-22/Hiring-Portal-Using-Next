@@ -101,7 +101,7 @@ export default function Login() {
       <ToastContainer />
       <div>
         <form onSubmit={handleSubmit}>
-          <Card className="mx-auto w-full max-w-sm h-full mt-10 mb-10">
+          <Card className="mx-auto w-full max-w-sm h-full mt-10 mb-10 border border-r-8 rounded-[14px]  shadow-[-10px_12px_20px_gray,_-2px_5px_10px_white] ">
             <CardHeader>
               <CardTitle className="text-2xl text-center">Login</CardTitle>
               <CardDescription>
@@ -160,7 +160,7 @@ export default function Login() {
               <Button className="w-full mt-2">Sign in</Button>
               <div className="text-center text-sm">
                 Don't have an account?{" "}
-                <Link href="/Signup" className="underline">Sign up</Link>
+                <Link href="/signup" className="underline">Sign up</Link>
               </div>
             </CardContent>
           </Card>

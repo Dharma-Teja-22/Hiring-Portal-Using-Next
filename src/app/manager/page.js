@@ -91,7 +91,7 @@ const page = () => {
             <Card 
               key={index}
               onClick={() => handleCardClick(path)} 
-              className="p-6 flex flex-col items-center bg-white border-2 border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+              className="p-8 flex flex-col items-center bg-white border-2 border-gray-200  transition-shadow duration-300 cursor-pointer rounded-[14px]  hover:shadow-[_-12px_5px_10px_gray,_-10px_12px_20px_white]"
             >
               {icon}
               <h1 className="text-lg font-medium text-center">{label}</h1>

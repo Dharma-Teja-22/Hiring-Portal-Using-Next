@@ -42,22 +42,28 @@ const Page = () => {
   return (
     <div className="w-screen shadow-2xl">
       <br />
+      <img
+    src="https://th.bing.com/th/id/OIP.darser57NM4LvRvjJ5BwpwHaFj?w=288&h=216&c=8&rs=1&qlt=90&o=6&rm=2&w=1024&h=768&pid=ImgDetMain"
+    className="fixed inset-0 w-full h-full -z-10"
+    alt="Background"
+  />
       <div className="flex items-center ml-8 ">
         <button onClick={() => router.back()} className="text-4xl text-blue-500 hover:text-blue-600 transition">
           ← 
         </button>
       </div>
       {/* shadow-2xl  */}
-      <div className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-4 pt-2 pb-2">
+      <div className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-4 pt-2 pb-2 ">
         {jobs.length === 0 ? (
           <p>Loading jobs...</p>
         ) : (
           jobs.map((job) => (
             <div
               key={job.job_id}
-              className="bg-white shadow-2xl rounded-lg overflow-hidden"
+              className="bg-white shadow-2xl rounded-lg  overflow-hidden backdrop-blur-16 backdrop-saturate-180  bg-opacity-75 border border-gray-300 border-opacity-30"
             >
-              <div className="p-6"> 
+              
+              <div className="p-6 "> 
                 <h2 className="text-xl font-bold mb-2 text-center text-cyan-900 ">
                    {job.title}
                 </h2>

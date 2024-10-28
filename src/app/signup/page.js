@@ -76,11 +76,11 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex h-screen w-screen justify-center place-items-center bg-gray-900">
+    <div className="flex h-screen w-screen justify-center place-items-center bg-gray-900" >
       <div>
         <ToastContainer />
         <form onSubmit={handleSubmit}>
-          <Card className="mx-auto max-w-sm mt-10 mb-10">
+          <Card className="mx-auto max-w-sm mt-10 mb-10 rounded-[14px]  shadow-[-10px_12px_20px_gray,_-2px_5px_10px_white]">
             <CardHeader>
               <CardTitle className="text-xl">Sign Up</CardTitle>
               <CardDescription>

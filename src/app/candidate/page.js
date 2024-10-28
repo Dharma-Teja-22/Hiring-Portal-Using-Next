@@ -70,7 +70,7 @@ const Page = () => {
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6 items-center">
           <Card 
             onClick={() => handleCardClick('/candidate/fetch_jobs')} 
-            className="p-6 flex flex-col items-center bg-white border-2 border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+            className="p-6 flex flex-col items-center bg-white border-2 border-gray-200 rounded-[14px]  hover:shadow-[_-12px_5px_10px_gray,_-10px_12px_20px_white] shadow-md  transition-shadow duration-300 cursor-pointer"
           >
             <FaBriefcase className='text-3xl mb-4 text-orange-600' />
             <h1 className='text-lg font-medium text-center'>Fetch All Jobs</h1>
@@ -78,7 +78,7 @@ const Page = () => {
 
           <Card 
             onClick={() => handleCardClick('/candidate/applied_jobs')} 
-            className="p-6 flex flex-col items-center bg-white border-2 border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+            className="p-6 flex flex-col items-center bg-white border-2 border-gray-200  transition-shadow duration-300 cursor-pointer rounded-[14px]  hover:shadow-[_-12px_5px_10px_gray,_-10px_12px_20px_white]"
           >
             <FaFileUpload className='text-3xl mb-4 text-purple-600' />
             <h1 className='text-lg font-medium text-center'>Applied Jobs</h1>
@@ -86,7 +86,7 @@ const Page = () => {
 
           <Card 
             onClick={() => handleCardClick('/candidate/final_result')} 
-            className="p-6 flex flex-col items-center bg-white border-2 border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+            className="p-6 flex flex-col items-center bg-white border-2 border-gray-200 shadow-md transition-shadow duration-300 cursor-pointer rounded-[14px]  hover:shadow-[_-12px_5px_10px_gray,_-10px_12px_20px_white]"
           >
             <FaTrophy className='text-3xl mb-4 text-yellow-600' />
             <h1 className='text-lg font-medium text-center'>Final Result / Selected Jobs</h1>
