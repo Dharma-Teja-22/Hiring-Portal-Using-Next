@@ -9,6 +9,7 @@ import { Button } from '../../../components/ui/button';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'next-client-cookies';
+import { ArrowLeft } from "lucide-react"
 
 const ApplyJobPage = () => {
   const router = useRouter();
@@ -66,8 +67,15 @@ const ApplyJobPage = () => {
     <div className="bg-gray-900 h-screen ">
       <ToastContainer />
       <div className="flex items-center ml-10">
-        <button onClick={() => router.back()} className="text-2xl mt-2 text-blue-500 hover:text-blue-600 transition">
+        {/* <button onClick={() => router.back()} className="text-2xl mt-2 text-blue-500 hover:text-blue-600 transition">
           ← 
+        </button> */}
+        <button
+          onClick={() => router.back()}
+          className="mb-6 flex items-center text-blue-500 hover:text-blue-600 transition mt-2"
+        >
+          <ArrowLeft className="w-5 h-5 mr-2" />
+          <span className="text-lg">Back</span>
         </button>
       </div>
       <form onSubmit={handleSubmit} className="flex justify-center  ">
@@ -117,7 +125,7 @@ const ApplyJobPage = () => {
 
               <button
                 type="submit"
-                class="flex  justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-200  before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-gray-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
+                class="flex text-sm justify-center gap-2 items-center mx-auto shadow-xl  bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-200  before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-gray-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
               >
                 Apply for job
                 <svg
