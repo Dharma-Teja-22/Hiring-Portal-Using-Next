@@ -4,7 +4,7 @@ import db from "../../../../config/db";
 
 //Checking Job Status
 export async function POST(request) {
-    const data = await request.json();
+    const data = await request.json();    
     try {
       const sql = `SELECT status FROM applications WHERE candidate_id = ? AND job_id = ?`;
       const result = await new Promise((resolve, reject) => {

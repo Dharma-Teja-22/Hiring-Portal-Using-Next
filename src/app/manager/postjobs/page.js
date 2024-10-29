@@ -176,39 +176,40 @@ const page = () => {
                 />
               </div>
 
-              <div className="grid gap-2">
-                <Label htmlFor="application_deadline" className="font-semibold">
-                  Application Deadline
-                </Label>
-                <input
-                  type="date"
-                  id="application_deadline"
-                  value={data.application_deadline.toISOString().split("T")[0]}
-                  className="border rounded-md p-2"
-                  onChange={(e) => {
-                    setData({
-                      ...data,
-                      application_deadline: new Date(e.target.value),
-                    });
-                  }}
-                />
-              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="application_deadline" className="font-semibold">
+                    Application Deadline
+                  </Label>
+                  <input
+                    type="date"
+                    id="application_deadline"
+                    value={data.application_deadline.toISOString().split("T")[0]}
+                    className="border rounded-md p-2"
+                    onChange={(e) => {
+                      setData({
+                        ...data,
+                        application_deadline: new Date(e.target.value),
+                      });
+                    }}
+                  />
+                </div>
 
-              <div className="grid gap-2">
-                <Label htmlFor="location" className="font-semibold">
-                  Location
-                </Label>
-                <Input
-                  id="location"
-                  type="text"
-                  value={data.location}
-                  className="border rounded-md p-2"
-                  onChange={(e) =>
-                    setData({ ...data, location: e.target.value })
-                  }
-                />
+                <div className="grid gap-2">
+                  <Label htmlFor="location" className="font-semibold">
+                    Location
+                  </Label>
+                  <Input
+                    id="location"
+                    type="text"
+                    value={data.location}
+                    className="border rounded-md p-2"
+                    onChange={(e) =>
+                      setData({ ...data, location: e.target.value })
+                    }
+                  />
+                </div>
               </div>
-
               <div className="flex gap-5">
                 <Label className="font-semibold">Job Type</Label>
                 {["Full-time", "Part-time", "Contract"].map((type) => (

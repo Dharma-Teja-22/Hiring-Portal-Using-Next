@@ -5,7 +5,7 @@ import db from "../../../config/db";
 // Candidate Fetch All Posted Jobs
 export async function GET(request) {
   try {
-    const sql = `SELECT job_id, title, salary, location, job_type, experience_level, skills, status FROM jobs`;
+    const sql = `SELECT job_id, title, salary, location, job_type, experience_level, skills, status, application_deadline FROM jobs`;
 
     const result = await new Promise((resolve, reject) => {
       db.query(sql, (err, res) => {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useCookies } from 'next-client-cookies';
+import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
   const [jobs, setJobs] = useState([]);

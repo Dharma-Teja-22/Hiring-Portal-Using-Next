@@ -6,6 +6,7 @@ import { Card } from '../../components/ui/card';
 import { FaBriefcase, FaFileUpload, FaTrophy } from 'react-icons/fa';
 import Link from 'next/link';
 import { useCookies } from 'next-client-cookies';
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Page = () => {
