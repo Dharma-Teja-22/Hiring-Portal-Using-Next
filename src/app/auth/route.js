@@ -87,7 +87,7 @@ export async function PUT(request) {
 
       const token = sign({ id: user.manager_id || user.candidate_id }, process.env.SECRET_KEY, { expiresIn: "1h" });
       return NextResponse.json({
-        status: StatusCodes.OK,
+        status:  200,
         msg: {
           id: user.manager_id || user.candidate_id,
           firstName: user.first_name,
