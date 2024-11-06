@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import { useCookies } from 'next-client-cookies';
 
-const page = () => {
+const Page = () => {
   const cookies = useCookies();
   const [candidates, setCandidates] = useState([]);
   const router = useRouter();
@@ -211,4 +211,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

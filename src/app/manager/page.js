@@ -7,7 +7,7 @@ import { FaClipboardList, FaUsers, FaEdit, FaCalendarCheck, FaCheckCircle } from
 import Link from 'next/link';
 import { useCookies } from 'next-client-cookies';
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const cookies = useCookies();
   const [storedFirstName, setStoredFirstName] = useState('');
@@ -103,4 +103,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

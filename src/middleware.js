@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 export default function middleware(request) {
   const path = request.nextUrl.pathname;  
-  console.log(path, "fgrom Middleware ----------------------------------")
   const isPublicPath = path === "/login" || path === "/signup" || path === "/";
   const token = request.cookies.get("token")?.value || "";
   if (isPublicPath && token ) {

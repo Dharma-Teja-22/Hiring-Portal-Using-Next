@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useCookies } from 'next-client-cookies';
 import "react-toastify/dist/ReactToastify.css";
 
-const page = () => {
+const Page = () => {
   const cookies = useCookies();
   const router = useRouter();
   const manager_id = Number(cookies.get("managerId"));
@@ -292,4 +292,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
