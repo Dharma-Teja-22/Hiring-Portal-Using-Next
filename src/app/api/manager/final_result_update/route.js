@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { StatusCodes } from "http-status-codes";
 import db from "../../../../config/db";
 import nodemailer from "nodemailer";
-import verify from "../route"
+import { verify } from "../route";
 
 //Candidate Info for Updating Final Result
 export async function GET(request) {
