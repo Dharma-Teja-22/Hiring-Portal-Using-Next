@@ -2,7 +2,23 @@ import { NextResponse } from "next/server";
 import { StatusCodes } from "http-status-codes";
 import db from "../../../../config/db";
 import nodemailer from "nodemailer";
-import { verify } from "../route";
+
+async function verify(request)
+{
+    const authHeader = request.headers.get('Authorization');
+    const token = authHeader && authHeader.split(' ')[1]; 
+    if (!token) 
+    {
+      return NextResponse.json(
+        { message: "No token provided." },
+        { status: StatusCodes.UNAUTHORIZED }
+      );
+    }
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const manager_id = decoded.id;
+    return manager_id;
+}
 
 //Candidate Info for Updating Final Result
 export async function GET(request) {
