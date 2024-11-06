@@ -39,7 +39,7 @@ const Page = () => {
         manager_id,
       };
 
-      const res = await fetch("/manager/api", {
+      const res = await fetch("../../api/manager", {
         method: "POST",
         headers: {
         //   "Content-Type": "application/json", 

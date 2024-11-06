@@ -40,7 +40,7 @@ const ApplyJobPage = () => {
     console.log("Button clicked! Form data:", data);
 
     try {
-      const status = await fetch("/candidate/api", {
+      const status = await fetch("../../api/candidate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

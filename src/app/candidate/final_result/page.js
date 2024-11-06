@@ -17,7 +17,7 @@ const Page = () => {
     const fetchJobs = async () => {
       if (candidate_id) {
         try {
-          const response = await fetch("/candidate/api", {
+          const response = await fetch("../../api/candidate", {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

@@ -16,7 +16,7 @@ export default function Component() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch("/candidate/api", {
+        const response = await fetch("../../api/candidate", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

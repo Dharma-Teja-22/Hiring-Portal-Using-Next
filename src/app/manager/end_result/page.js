@@ -17,7 +17,7 @@ const Page = () => {
     const fetchCandidates = async () => {
       if (manager_id) {
         try {
-          const response = await fetch("/manager/api/final_result_update", {
+          const response = await fetch("../../api/manager/final_result_update", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Page = () => {
 
   const handleReject = async (candidate_id, job_id, email, title) => {
     try {
-        const response = await fetch("/manager/api/final_result_update", {
+        const response = await fetch("../../api/manager/final_result_update", {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const Page = () => {
 
   const handleInterviewUpdate = async (candidate_id, job_id, email, title, interview_date) => {
     try {
-        const response = await fetch("/manager/api/final_result_update", {
+        const response = await fetch("../../api/manager/final_result_update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

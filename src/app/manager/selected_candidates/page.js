@@ -16,7 +16,7 @@ const Page = () => {
     const fetchCandidates = async () => {
       if (manager_id) {
         try {
-          const response = await fetch("/manager/api/final_result_update", {
+          const response = await fetch("../../api/manager/final_result_update", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

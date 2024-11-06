@@ -20,7 +20,7 @@ const Page = () => {
       const manager_id = Number(cookies.get("managerId"));
       if (manager_id) {
         try {
-          const response = await fetch("/manager/api", {
+          const response = await fetch("../../api/manager", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const Page = () => {
       };
 
       try {
-        await fetch("/manager/api/interview_status_update", {
+        await fetch("../../api/manager/interview_status_update", {
           method: "POST",
           headers: {
             "Content-Type": "application/json", 

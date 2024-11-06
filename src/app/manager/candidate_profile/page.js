@@ -23,7 +23,7 @@ const Page = () => {
         }
       
         try {
-          const response = await fetch(`/manager/api`, {
+          const response = await fetch(`../../api/manager`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 
 // Function for JWT Verification
-export default function verify(request)
+export async function verify(request)
 {
     const authHeader = request.headers.get('Authorization');
     const token = authHeader && authHeader.split(' ')[1]; 

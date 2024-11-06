@@ -15,7 +15,7 @@ const CandidatesPage = () => {
       const manager_id = Number(cookies.get("managerId"));
       if (manager_id) {
         try {
-          const response = await fetch("/manager/api", {
+          const response = await fetch("../../api/manager", {
             method: "GET",
             headers: {
             //   "Content-Type": "application/json",

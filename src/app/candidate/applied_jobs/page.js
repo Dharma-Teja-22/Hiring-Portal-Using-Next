@@ -21,7 +21,7 @@ const Page = () => {
     const fetchJobs = async () => {
       if (candidate_id) {
         try {
-          const response = await fetch("/candidate/api", {
+          const response = await fetch("../../api/candidate", {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const Page = () => {
       try {
         setLoadingJobId(job_id);
         // localStorage.setItem("jobId", String(job_id));
-        const response = await fetch("/candidate/api/job_status", {
+        const response = await fetch("../../api/candidate/job_status", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
